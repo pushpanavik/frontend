@@ -41,12 +41,6 @@ params: {
    templateUrl:'templates/dashboard.html',
    controller:'noteCtrl'
 })
-.state('home.dashboard.logout',
-{
-  url:'/Logout',
-  templateUrl:'templates/logout.html',
-  controller:'homeCtrl'
-})
 .state('home.trash',
 {
   url:'/trash',
@@ -57,12 +51,6 @@ params: {
 {
   url:'/Archive',
   templateUrl:'templates/archive.html',
-  controller:'noteCtrl'
-})
-.state('home.note',
-{
-  url:'/note',
-  templateUrl:'templates/note.html',
   controller:'noteCtrl'
 })
 .state('home.reminder',

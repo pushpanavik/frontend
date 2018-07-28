@@ -1,6 +1,81 @@
 app
-  .controller('noteCtrl', function(noteservice, $scope, $state, $location, $window,$mdDialog) {
+  .controller('noteCtrl', function(noteservice, $scope, $state, $location, $window,$mdDialog,$mdSidenav) {
     var baseUrl = "http://localhost:9090/fundoo/";
+
+    $scope.toggleLeft = buildToggler('left');
+
+    function buildToggler(componentId) {
+      return function() {
+        $mdSidenav(componentId).toggle();
+
+        var isOpen=$mdSidenav(componentId).isOpen();
+        if(isOpen){
+        document.getElementById("sidenavId").style.marginLeft="200px";
+      }else {
+        document.getElementById("sidenavId").style.marginLeft="0px";
+      }
+      }
+    }
+
+    $scope.logoutCard = false;
+       $scope.logOut = function() {
+         if ($scope.logoutCard === false) {
+           $scope.logoutCard = true;
+           $window.localStorage.clear();
+         } else {
+           $scope.logoutCard = false;
+         }
+       }
+
+
+
+    $scope.changeColor = function() {
+       if ($state.is('home.dashboard')) {
+         $scope.htitle = "Google keep";
+             $scope.definedColor = {
+                 'background-color': '#fb0',
+                 'color': 'black'
+       }
+     }
+        else if ($state.is('home.archive')) {
+         $scope.htitle = "Archive";
+             $scope.definedColor = {
+                 'background-color': '#607d8b',
+                 'color': '#ffffff'
+             };
+           }
+        else if ($state.is("home.trash")) {
+          $scope.htitle="Trash";
+          $scope.definedColor = {
+              'background-color': '#636363',
+              'color': '#ffffff'
+          };
+       }
+       else if($state.is('home.reminder')){
+            $scope.htitle = "Reminder";
+                $scope.definedColor = {
+                    'background-color': '#607d8b',
+                    'color': '#ffffff'
+                };
+              }
+     };
+     $scope.changeColor();
+
+    $scope.gotoTrashPage=function(){
+    $state.go("home.trash");
+    }
+
+    $scope.goToNote=function(){
+    $state.go("home.note");
+    }
+
+    $scope.goToArchive=function(){
+    $state.go("home.archive");
+    }
+    $scope.goToReminder=function(){
+    $state.go("home.reminder");
+    }
+
 
     $scope.showAdvanced = function(ev,note) {
       console.log('note info inside showAdvanced',note);
@@ -29,8 +104,8 @@ app
         title: $scope.title,
         description: $scope.description,
         color: "white",
-        isArchive: false,
-        isPin: false,
+        archive: false,
+        pin: false,
         isTrash: false
       };
       var url = baseUrl + "user/addNote";
