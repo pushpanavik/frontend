@@ -1,0 +1,20 @@
+<div ng-init="getallnotes()">
+  <div layout="row" layout-wrap layout-fill style="padding-bottom: 32px;padding-left: 310px;">
+
+    <md-card style="height: 150px;" flex="30" ng-repeat="x in notes | filter:{archive:true} " ng-mouseover="hoverIn($event)" ng-mouseleave="hoverOut($event)">
+
+      <div class="value-data" ng-click="showAlert($event,x)">{{x.title}}
+        <md-button ng-click="pin()" class="md-icon-button" style="margin: 6px 0px 3px 181px;" ng-show="hoverEdit">
+          <md-icon><img src="images/pin.svg" /></md-icon>
+          <md-tooltip>pin note</md-tooltip>
+        </md-button>
+      </div>
+      <div class="value">{{x.description}}</div>
+
+    <icon></icon>
+      </div>
+
+    </md-card>
+  </div>
+
+</div>
