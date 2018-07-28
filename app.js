@@ -59,6 +59,12 @@ params: {
   templateUrl:'templates/reminder.html',
   controller:'noteCtrl'
 })
+.state('home.reminder',
+{
+  url:'/reminder',
+  templateUrl:'templates/reminder.html',
+  controller:'noteCtrl'
+})
 
 // $locationProvider.html5Mode(true);
 
